@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Success</p>
+
+<table class="table">
+  <th>
+  <td>Subject</td>
+  <td>From</td>
+  <td>Copy HTML</td>
+  </th>
+  <tr>
+    <td>{{ subject }}</td>
+    <td>{{ sender }}</td>
+    <td>{{ message_body }}</td>
+  </tr>
+</table>
+
+{% endblock %}
