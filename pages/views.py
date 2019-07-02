@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from listings.models import Listing
+from realtors.models import Realtor
+from listings.choices import price_choices, bedroom_choices, state_choices
 import imaplib
 import email
 import imapclient
 import pyzmail
-from django.http import HttpResponse
 import bs4
 
 
@@ -15,33 +18,32 @@ def get_body(msg):
 
 
 def index(request):
-    return render(request, 'pages/index.html')
+    listings = Listing.objects.order_by(
+        '-list_date').filter(is_published=True)[:3]
+
+    context = {
+        'listings': listings,
+        'state_choices': state_choices,
+        'bedroom_choices': bedroom_choices,
+        'price_choices': price_choices
+    }
+    return render(request, 'pages/index.html', context)
 
 
 def about(request):
-    return render(request, 'pages/about.html')
+    realtors = Realtor.objects.all()
+    mvp_realtors = Realtor.objects.all().filter(is_mvp=True)
+
+    context = {
+        'realtors': realtors,
+        'mvp_realtors': mvp_realtors
+    }
+    return render(request, 'pages/about.html', context)
 
 
 def getemails(request):
-    '''
-      user = 'zachbairddev@gmail.com'
-      password = 'Cryolenix1'
-      imap_url = 'imap.gmail.com'
-
-      conn = imaplib.IMAP4_SSL(imap_url)
-
-      conn.login(user, password)
-      conn.select('INBOX')
-      result, data = conn.fetch(b'0', '(RFC822)')
-      raw = email.message_from_bytes(data[0][1])
-      # print(get_body(raw))
-      msgs = pull_emails(search('FROM', 'mail-noreply@google.com', conn))
-      for msg in msgs:
-          print(get_body(email.message_from_bytes(msg[0][1])))
-    '''
-
     imapObj = imapclient.IMAPClient('imap.gmail.com', ssl=True)
-    imapObj.login('zachbairddev@gmail.com', 'Cryolenix1')
+    imapObj.login('zachbairddev@gmail.com', '[password]')
     imapObj.select_folder('INBOX', readonly=True)
     UIDS = imapObj.search(['SINCE', '15-JUN-2019'])
     print(UIDS)
