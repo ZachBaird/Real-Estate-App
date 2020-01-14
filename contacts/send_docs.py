@@ -7,10 +7,10 @@ from docusign_esign import ApiClient, EnvelopesApi, EnvelopeDefinition, Signer, 
 # Fill in these constants
 #
 # Obtain an OAuth access token from https://developers.docusign.com/oauth-token-generator
-access_token = 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQkAAAABAAUABwAAYQHXwQvXSAgAAKEk5QQM10gCAA0ub7zF2aNDkDF_jvUg2I4VAAEAAAAYAAkAAAAFAAAAKwAAAC0AAAAvAAAAMQAAADIAAAA4AAAAMwAAADUAAAANACQAAABmMGYyN2YwZS04NTdkLTRhNzEtYTRkYS0zMmNlY2FlM2E5NzgwAIBzwr_BC9dINwA_nANvB0-pSI_UFfRSxNre.5dxu946lX6nhNuk-0CUUH1IZ1jABZwBs8_vYQ6qspSNS9ELne4pISlQYtqayiS3Vx0jwqwc0PHh_bczMv_MD8O_P9mq6NLOk2lGniqrJWitiQJ-Y57QGWgcGfI-R0iSa54iv-LcqMSavOT-KVx3yB2YmCesw7c0aisr3FOBu2rJj1Xhiwz9uzenGk2mOWziJ17_S5WkQH1KwMofghWAA2LaB0qNqn81ccsYccdJhwV_LO8mu3c7uY36Eaxw14w-iRxctyMBNPOfjl3nubd_1cQmDcs-Py-OrLwrq24dHsKJQGdpd1W8uFXgggfW2Dw5emqSFLQ1KDvMZupnoorrkWw'
+access_token = {{OAuth token}}
 # Obtain your accountId from demo.docusign.com -- the account id is shown in the drop down on the
 # upper right corner of the screen by your picture or the default picture.
-account_id = '8730414'
+account_id = {{account id}}
 # Recipient Information:
 #signer_name = 'Zachary Baird'
 #signer_email = 'zachbairddev@gmail.com'
