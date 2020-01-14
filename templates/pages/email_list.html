@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+  {% include 'partials/_alerts.html' %}
+
+  {% if user.email == 'zach@gmail.com' %}
+  {% if inquiries %}
+  <table class="table">
+    <thead>
+      <th>Inquirer</th>
+      <th>Email</th>
+      <th>Phone #</th>
+      <th>Zip Code</th>
+      <th></th>
+    </thead>
+    {% for inquiry in inquiries %}
+    <tr>
+      <td>{{ inquiry.inquiry_name }}</td>
+      <td>{{ inquiry.inquiry_email }}</td>
+      <td>{{ inquiry.inquiry_phone }}</td>
+      <td>{{ inquiry.inquiry_zipcode }}</td>
+      <td>
+        <form method="POST" action="{% url 'sendnda' %}">
+          {% csrf_token %}
+          <input type="hidden" name="inquiryName" value="{{ inquiry.inquiry_name }}">
+          <input type="hidden" name="inquiryEmail" value="{{ inquiry.inquiry_email }}">
+          <input type="hidden" name="inquiryPhone" value="{{ inquiry.inquiry_phone }}">
+          <input type="hidden" name="inquiryZipcode" value="{{ inquiry.inquiry_zipcode }}">
+          <input type="hidden" name="inquiryRefId" value="{{ inquiry.inquiry_ref_id }}">
+          <input type="hidden" name="inquiryHeadline" value="{{ inquiry.inquiry_headline }}">
+          <input type="submit" class="btn btn-primary" value="Send NDA">
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% else %}
+<p>There are no messages</p>
+{% endif %}
+{% endif %}
+</div>
+
+{% endblock %}
